@@ -9,7 +9,7 @@ namespace ConsoleRpgEntities.Data
 {
     public class GameContext : DbContext
     {
-        public DbSet<Player> Players { get; set; }
+        public DbSet<Player> Player { get; set; }
         public DbSet<Monster> Monsters { get; set; }
         public DbSet<Ability> Abilities { get; set; }
         public DbSet<Item> Items { get; set; }
@@ -34,6 +34,7 @@ namespace ConsoleRpgEntities.Data
             // Configure many-to-many relationship
             modelBuilder.Entity<Player>()
                 .HasMany(p => p.Abilities)
+                //.WithMany(a => a.Player)
                 .WithMany(a => a.Players)
                 .UsingEntity(j => j.ToTable("PlayerAbilities"));
 
@@ -67,6 +68,20 @@ namespace ConsoleRpgEntities.Data
                 .WithMany()            // No need for reverse navigation back to Equipment
                 .HasForeignKey(e => e.ArmorId)  // Sets ArmorId as the foreign key in Equipment
                 //.OnDelete(DeleteBehavior.Restrict)  // Prevents cascading deletes to avoid conflict
+                .IsRequired(false);
+
+            modelBuilder.Entity<Equipment>()
+                .HasOne(e => e.Potion)  // Define the relationship to the Weapon item
+                .WithMany()             // Equipment doesn't need to navigate back to Item
+                .HasForeignKey(e => e.PotionId)  // Specifies the foreign key column in Equipment
+                                         //.OnDelete(DeleteBehavior.Restrict)  // Prevents cascading deletes, avoids multiple paths
+                .IsRequired(false);
+
+            modelBuilder.Entity<Equipment>()
+                .HasOne(e => e.Accessory)  // Define the relationship to the Weapon item
+                .WithMany()             // Equipment doesn't need to navigate back to Item
+                .HasForeignKey(e => e.AccessoryId)  // Specifies the foreign key column in Equipment
+                                                 //.OnDelete(DeleteBehavior.Restrict)  // Prevents cascading deletes, avoids multiple paths
                 .IsRequired(false);
 
             // Explanation of Why DeleteBehavior.Restrict:

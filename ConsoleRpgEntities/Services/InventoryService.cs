@@ -1,8 +1,8 @@
-﻿using ConsoleRpgEntities.Models.Attributes;
-using ConsoleRpgEntities.Models.Characters;
-using ConsoleRpgEntities.Models.Abilities.PlayerAbilities;
-using ConsoleRpgEntities.Models.Equipments;
-
+﻿using ConsoleRpgEntities.Models.Equipments;
+using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
+using System;
+using ConsoleRpgEntities.Models.Rooms;
 
 namespace ConsoleRpgEntities.Services
 {
@@ -23,5 +23,17 @@ namespace ConsoleRpgEntities.Services
                 _outputService.WriteLine($"{item.Name}");
             }
         }
+        public void ClearItems(List<Item> Items)
+        {
+            foreach (var item in Items)
+            {
+                item.RoomId = null;
+            }
+        }
+
+        //public void ClearItems(List<Room> rmtmp)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

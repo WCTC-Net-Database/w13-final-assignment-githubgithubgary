@@ -9,6 +9,6 @@ namespace ConsoleRpgEntities.Models.Characters.Monsters
         public int Health { get; set; }
         public int AggressionLevel { get; set; }
         public string MonsterType { get; set; }
-        
+        public int RoomId { get; set; }
     }
 }

@@ -49,6 +49,7 @@ public static class Startup
         services.AddTransient<MapManager>();
         services.AddSingleton<OutputManager>();
         services.AddSingleton<PlayerService>();
+        services.AddSingleton<InventoryService>();
         services.AddSingleton<AbilityService>();
         services.AddSingleton<IOutputService, OutputService>();
     }

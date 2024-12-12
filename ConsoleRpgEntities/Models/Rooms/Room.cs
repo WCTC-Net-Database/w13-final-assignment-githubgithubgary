@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using ConsoleRpgEntities.Models.Characters;
+using ConsoleRpgEntities.Models.Equipments;
 
 namespace ConsoleRpgEntities.Models.Rooms
 {
@@ -29,5 +30,10 @@ namespace ConsoleRpgEntities.Models.Rooms
         public virtual int? PlayerId { get; set; }
         public virtual ICollection<Player> Players { get; set; }
 
+        public virtual int? ItemId { get; set; }
+        public virtual ICollection<Item> Items { get; set; }
+
+        public virtual int? MonsterId { get; set; }
+        public virtual ICollection<Player> Monters { get; set; }
     }
 }
